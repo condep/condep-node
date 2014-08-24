@@ -14,20 +14,12 @@ namespace ConDep.Node.Controllers
                         {
                             new Link { Href = ApiUrls.Home(Url), Rel = ApiRels.Self, Method = "GET"},
                             new Link { Href = ApiUrls.Sync.Home(Url), Rel = ApiRels.Sync, Method = "GET"},
-                            new Link {Href = ApiUrls.Sync.DirectoryTemplate(Url), Rel = ApiRels.DirTemplate , Method = "GET"},
-                            new Link {Href = ApiUrls.Sync.FileTemplate(Url), Rel = ApiRels.FileTemplate, Method = "GET"},
-                            new Link {Href = ApiUrls.Iis.IisTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"}
+                            new Link { Href = ApiUrls.Sync.DirectoryTemplate(Url), Rel = ApiRels.DirTemplate , Method = "GET"},
+                            new Link { Href = ApiUrls.Sync.FileTemplate(Url), Rel = ApiRels.FileTemplate, Method = "GET"},
+                            new Link { Href = ApiUrls.Iis.IisTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"},
+                            new Link { Href = ApiUrls.Install.MsiTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"},
+                            new Link { Href = ApiUrls.Install.CustomTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"}
                         };
-             //return new dynamic[]
-             //           {
-             //               new Link {Href = ApiUrls.Home(Url), Rel = "self"},
-             //               new List<Link>
-             //                   {
-             //                       new Link {Href = ApiUrls.Sync.Directory(Url), Rel = "self"},
-             //                       new Link {Href = ApiUrls.Sync.File(Url), Rel = "self"},
-             //                   }
-             //           };
-
          }
     }
 }
