@@ -93,6 +93,8 @@
   <ItemGroup>
     <Compile Include="ApiUrls.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Install\CustomController.cs" />
+    <Compile Include="Controllers\Install\MsiController.cs" />
     <Compile Include="Controllers\Sync\FileController.cs" />
     <Compile Include="Controllers\Iis\IisController.cs" />
     <Compile Include="Controllers\Sync\WebAppController.cs" />

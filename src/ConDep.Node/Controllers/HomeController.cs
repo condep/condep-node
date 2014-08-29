@@ -17,8 +17,8 @@ namespace ConDep.Node.Controllers
                             new Link { Href = ApiUrls.Sync.DirectoryTemplate(Url), Rel = ApiRels.DirTemplate , Method = "GET"},
                             new Link { Href = ApiUrls.Sync.FileTemplate(Url), Rel = ApiRels.FileTemplate, Method = "GET"},
                             new Link { Href = ApiUrls.Iis.IisTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"},
-                            new Link { Href = ApiUrls.Install.MsiTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"},
-                            new Link { Href = ApiUrls.Install.CustomTemplate(Url), Rel = ApiRels.IisTemplate, Method = "GET"}
+                            new Link { Href = ApiUrls.Install.MsiTemplate(Url), Rel = ApiRels.InstallMsiTemplate, Method = "GET"},
+                            new Link { Href = ApiUrls.Install.CustomTemplate(Url), Rel = ApiRels.InstallCustomTemplate, Method = "GET"}
                         };
          }
     }

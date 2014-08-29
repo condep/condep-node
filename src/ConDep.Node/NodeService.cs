@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.ServiceProcess;
 using System.Threading;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
-using System.Web.Http.SelfHost.Channels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -76,17 +74,18 @@ namespace ConDep.Node
             serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             AddRoutes(config);
-            //config.Routes.MapHttpRoute("Iis", "api/{controller}", new { controller = "Iis" });
-            //config.Routes.MapHttpRoute("WebApp", "api/iis/{controller}", new { controller = "IisWebApp" });
-            //config.Routes.MapHttpRoute("Default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
-            //config.Routes.MapHttpRoute("File Upload", "api/sync/{controller}/{filename}");
             return config;
         }
 
         public static void AddRoutes(HttpConfiguration config)
         {
+            config.Routes.MapHttpRoute("Install", "api/install/{controller}/{packageName}",
+                new
+                {
+                    packageName = RouteParameter.Optional
+                });
             config.Routes.MapHttpRoute("Sync", "api/sync/{controller}");
-            config.Routes.MapHttpRoute("WebAppSync", "api/sync/webapp/{siteName}", new {controller = "WebApp"});
+            config.Routes.MapHttpRoute("WebAppSync", "api/sync/webapp/{siteName}", new { controller = "WebApp" });
             config.Routes.MapHttpRoute("Iis", "api/iis/{siteName}",
                                        new
                                            {
