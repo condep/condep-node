@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Web.Http.SelfHost;
@@ -18,8 +19,10 @@ namespace ConDep.Node
 
         protected override BindingParameterCollection OnConfigureBinding(HttpBinding httpBinding)
         {
-            httpBinding.Security.Mode = HttpBindingSecurityMode.TransportCredentialOnly;
-            httpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Ntlm;
+            httpBinding.Security.Mode = HttpBindingSecurityMode.Transport;
+            //httpBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Ntlm;
+            httpBinding.ConfigureTransportBindingElement =
+                element => element.AuthenticationScheme = AuthenticationSchemes.Negotiate;
             return base.OnConfigureBinding(httpBinding);
         }
     }

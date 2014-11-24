@@ -98,6 +98,7 @@
     <Compile Include="Controllers\Sync\FileController.cs" />
     <Compile Include="Controllers\Iis\IisController.cs" />
     <Compile Include="Controllers\Sync\WebAppController.cs" />
+    <Compile Include="HttpConfigHandler.cs" />
     <Compile Include="Model\WebAppInfo.cs" />
     <Compile Include="InvalidAttributesException.cs" />
     <Compile Include="MultipartSyncDirStreamProvider.cs" />

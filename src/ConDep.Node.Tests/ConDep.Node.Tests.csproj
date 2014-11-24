@@ -81,7 +81,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InstallerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyncTests.cs" />
   </ItemGroup>
