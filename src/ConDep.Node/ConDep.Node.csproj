@@ -55,6 +55,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
@@ -68,12 +71,15 @@
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
@@ -92,12 +98,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiUrls.cs" />
+    <Compile Include="CertGen.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Install\CustomController.cs" />
     <Compile Include="Controllers\Install\MsiController.cs" />
     <Compile Include="Controllers\Sync\FileController.cs" />
     <Compile Include="Controllers\Iis\IisController.cs" />
     <Compile Include="Controllers\Sync\WebAppController.cs" />
+    <Compile Include="HttpApiSslCert.cs" />
     <Compile Include="HttpConfigHandler.cs" />
     <Compile Include="Model\WebAppInfo.cs" />
     <Compile Include="InvalidAttributesException.cs" />
@@ -122,6 +130,7 @@
     </Compile>
     <Compile Include="SyncDirHandler.cs" />
     <Compile Include="Model\SyncFile.cs" />
+    <Compile Include="X509CertBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System.Diagnostics;
+using System.ServiceProcess;
 
 namespace ConDep.Node
 {
@@ -11,12 +12,12 @@ namespace ConDep.Node
             {
                 url = args[0];
             }
-//#if(DEBUG)
-//            var service = new NodeService(url);
-//            service.Start(args);
-//#else
+#if(DEBUG)
+            var service = new NodeService(url);
+            service.Start(args);
+#else
             ServiceBase.Run(new ServiceBase[] { new NodeService(url) });
-//#endif
+#endif
         }
     }
 }
