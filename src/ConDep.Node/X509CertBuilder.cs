@@ -14,6 +14,11 @@ using Org.BouncyCastle.X509;
 
 namespace ConDep.Node
 {
+    public enum CertStrength
+    {
+        bits_512 = 512, bits_1024 = 1024, bits_2048 = 2048, bits_4096 = 4096
+    }
+
     public class X509CertBuilder
     {
         const string SignatureAlgorithm = "SHA256WithRSA";
