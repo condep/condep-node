@@ -46,7 +46,7 @@ namespace ConDep.Node
             _certificateGenerator.SetSubjectDN(new X509Name(issuedToDomainName));
             _certificateGenerator.SetIssuerDN(_issuer);
 
-            var utcNow = DateTime.UtcNow;
+            var utcNow = DateTime.UtcNow.AddDays(-1);
             _certificateGenerator.SetNotBefore(utcNow);
             _certificateGenerator.SetNotAfter(utcNow.AddMonths(validMonths));
             var keyGenerationParameters = new KeyGenerationParameters(_random, _strength);
