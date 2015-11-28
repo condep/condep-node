@@ -12,7 +12,6 @@ How to contribute
 Need help?
 ----------
 * [Documentation](http://www.condep.io/docs)
-* [![Join the chat at https://gitter.im/condep/condep-dsl-operations-contrib](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/condep/condep-dsl-operations-contrib?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 * [Google Groups](https://groups.google.com/forum/#!forum/con-dep)
 * [Gitter](https://gitter.im/condep?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
