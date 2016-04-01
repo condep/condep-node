@@ -6,31 +6,23 @@ using Org.BouncyCastle.Security.Certificates;
 
 namespace ConDep.Node
 {
-    internal class CertificateHandler
+    public class CertificateHandler
     {
         private static string APP_ID = "{4eac5b46-986d-4ae6-b12f-74d7779e19ec}";
 
-        public static void ConfigureSslCert(string url)
+        public static X509Certificate2 ConfigureSslCert(string url)
         {
             var certStore = new X509Store(StoreLocation.LocalMachine);
-
             try
             {
                 certStore.Open(OpenFlags.ReadWrite);
-
                 CleanOldCerts(certStore);
-
                 X509Certificate2 cert;
-
                 if (!CertificateExist(certStore, out cert))
                 {
                     cert = AddCertificate(certStore);
                 }
-
-                if (!CertificateBoundToIpAndPort(url, cert.GetCertHash()))
-                {
-                    BindCertificateToIpAndPort(cert, url);
-                }
+                return cert;
             }
             finally
             {
@@ -38,15 +30,14 @@ namespace ConDep.Node
             }
         }
 
-        private static void BindCertificateToIpAndPort(X509Certificate2 cert, string url)
+        public static void BindCertificateToIpAndPort(X509Certificate2 cert, string url)
         {
             var uri = new Uri(url);
             var certInfo = HttpApiSslCert.QuerySslCertificateInfo(new IPEndPoint(0, uri.Port));
             if (certInfo != null) HttpApiSslCert.DeleteCertificateBinding(new[] { new IPEndPoint(0, uri.Port) });
             HttpApiSslCert.BindCertificate(new IPEndPoint(0, uri.Port), cert.GetCertHash(), StoreName.My, new Guid(APP_ID));
         }
-
-        private static bool CertificateBoundToIpAndPort(string url, byte[] certHash)
+        public static bool CertificateBoundToIpAndPort(string url, byte[] certHash)
         {
             var uri = new Uri(url);
             var certInfo = HttpApiSslCert.QuerySslCertificateInfo(new IPEndPoint(0, uri.Port));
@@ -69,10 +60,13 @@ namespace ConDep.Node
             var certCol = certStore.Certificates.Find(X509FindType.FindBySubjectName, "node.condep.io", false);
             foreach (var cert in certCol)
             {
-                if (cert.NotAfter <= DateTime.Now.AddDays(-7)) certStore.Remove(cert);
+                var expiryThreshold = cert.NotAfter.AddDays(-7);
+                if (DateTime.UtcNow > expiryThreshold)
+                {
+                    certStore.Remove(cert);
+                }
             }
         }
-
         private static bool CertificateExist(X509Store certStore, out X509Certificate2 cert)
         {
             cert = null;
