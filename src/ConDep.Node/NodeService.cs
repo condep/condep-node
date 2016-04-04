@@ -30,11 +30,14 @@ namespace ConDep.Node
 
         protected override void OnStart(string[] args)
         {
-            CertificateHandler.ConfigureSslCert(_url);
-
+            var cert = CertificateHandler.ConfigureSslCert(_url);
+            if (!CertificateHandler.CertificateBoundToIpAndPort(_url, cert.GetCertHash()))
+            {
+                CertificateHandler.BindCertificateToIpAndPort(cert, _url);
+            }
             var config = HttpConfigHandler.CreateConfig(_url);
             _server = new HttpSelfHostServer(config);
-             _server.OpenAsync().Wait();
+            _server.OpenAsync().Wait();
             EventLog.WriteEntry("ConDepNode started", EventLogEntryType.Information);
         }
 
