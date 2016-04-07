@@ -49,7 +49,7 @@ namespace ConDep.Node.Controllers.Install
             UninstallRegKey package;
             if (PackageExist(RegKeys, packageName, out package))
             {
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Found, "Package allready installed"));
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Found, "Package already installed"));
             }
 
             string filePath = DownloadPackage(packageUri);
@@ -62,7 +62,7 @@ namespace ConDep.Node.Controllers.Install
             UninstallRegKey package;
             if (PackageExist(RegKeys, packageName, out package))
             {
-                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Found, "Package allready installed"));
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Found, "Package already installed"));
             }
 
             var result = InstallPackage(packageFile, packageParams);
