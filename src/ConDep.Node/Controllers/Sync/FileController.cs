@@ -41,7 +41,7 @@ namespace ConDep.Node.Controllers.Sync
                 throw new HttpResponseException(
                     Request.CreateErrorResponse(
                         HttpStatusCode.Found,
-                        "File already exist. Use PUT to update existing file. Event better, follow the rules of HATEOAS and this will never happen.")
+                        "File already exist. Use PUT to update existing file. Even better, follow the rules of HATEOAS and this will never happen.")
                     );
             }
 
@@ -113,7 +113,7 @@ namespace ConDep.Node.Controllers.Sync
                 throw new HttpResponseException(
                     Request.CreateErrorResponse(
                         HttpStatusCode.Found,
-                        "File does not exist. Use POST to create this file. Event better, follow the rules of HATEOAS and this will never happen.")
+                        "File does not exist. Use POST to create this file. Even better, follow the rules of HATEOAS and this will never happen.")
                     );
             }
 
