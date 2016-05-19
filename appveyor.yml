@@ -5,7 +5,7 @@ branches:
 configuration:
 - Release
 before_build:
-- ps: nuget restore src/condep-dsl.sln
+- ps: nuget restore src/condep-node.sln
 build:
   project: src\condep-node.sln
 os: Visual Studio 2015
