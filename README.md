@@ -1,7 +1,9 @@
 condep-node
 =============================
 
-ConDep's remote node that allows ConDep to securly synchronize files over SSL. 
+ConDep's remote node that allows ConDep to securly synchronize files over SSL.
+
+![build status](https://ci.appveyor.com/api/projects/status/cp5jcftud23yeb3w?svg=true)
 
 How to contribute
 -----------------
