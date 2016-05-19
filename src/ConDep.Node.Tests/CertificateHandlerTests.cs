@@ -39,6 +39,7 @@ namespace ConDep.Node.Tests
                 AddToStore(certificate);
                 CertificateHandler.ConfigureSslCert("https://localhost:4444/ConDepNode/");
                 var certificatesFromStore = GetCertificates();
+                Console.WriteLine("certificatesFromStore.Count: " + certificatesFromStore.Count);
                 var certificateFromStore = certificatesFromStore[0];
                 Assert.AreEqual(certificate.Thumbprint, certificateFromStore.Thumbprint);
             }
