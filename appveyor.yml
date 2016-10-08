@@ -14,6 +14,7 @@ assembly_info:
   assembly_informational_version: "$(assembly_informational_version)"
 build_script:
 - ps: .\build.ps1
+test: off
 artifacts:
 - path: .\build\output\**\*.nupkg
   name: NuGet   
