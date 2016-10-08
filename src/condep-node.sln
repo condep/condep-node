@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConDep.Node", "ConDep.Node\ConDep.Node.csproj", "{463BF035-13CF-4B8E-9A0D-AACE0FA7BC68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConDep.Node.Tests", "ConDep.Node.Tests\ConDep.Node.Tests.csproj", "{43A31011-F39A-42F0-85BC-8EC5C0EF78B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{E711C83E-6B7F-4B2E-8686-3404556DA4E6}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\buildRelease.ps1 = ..\build\buildRelease.ps1
+		..\build\default.ps1 = ..\build\default.ps1
+		..\build\install.ps1 = ..\build\install.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
