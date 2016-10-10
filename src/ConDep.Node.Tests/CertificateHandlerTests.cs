@@ -6,6 +6,7 @@ using static System.Double;
 namespace ConDep.Node.Tests
 {
     [TestFixture]
+    [Category("integration")]
     public class CertificateHandlerTests
     {
         [Test]

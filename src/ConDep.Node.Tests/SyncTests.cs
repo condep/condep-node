@@ -7,6 +7,7 @@ using ConDep.Dsl.Remote.Node.Model;
 namespace ConDep.Node.Tests
 {
     [TestFixture]
+    [Category("integration")]
     public class SyncTests
     {
         private DirectoryInfo _clientFilesRoot;
