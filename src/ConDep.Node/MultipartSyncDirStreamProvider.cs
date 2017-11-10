@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -15,6 +16,7 @@ namespace ConDep.Node
         private int _contentCounter = -1;
         private int _postProcContentMarker = -1;
         private readonly SyncResult _syncResult = new SyncResult();
+        private List<string> addedFiles = new List<string>();
 
         public MultipartSyncDirStreamProvider(string rootPath) : base(rootPath)
         {
@@ -48,6 +50,7 @@ namespace ConDep.Node
             {
                 var filename = GetLocalFileName(headers);
                 localFilePath = Path.Combine(RootPath, filename);
+                addedFiles.Add(localFilePath);
             }
             catch (Exception e)
             {
@@ -123,7 +126,7 @@ namespace ConDep.Node
 
                     if (data != null)
                     {
-                        DeleteFiles(data);
+                        DeleteOrMoveFiles(data);
                         ChangeAttributesOnFolders(data);
                     }
                 }
@@ -153,28 +156,57 @@ namespace ConDep.Node
             }
         }
 
-        private void DeleteFiles(SyncPostProcContent content)
+        private void DeleteOrMoveFiles(SyncPostProcContent content)
         {
-            DeleteTheFiles(content);
+            DeleteOrMoveTheFiles(content);
             DeleteTheDirectories(content);
         }
 
-        private void DeleteTheFiles(SyncPostProcContent content)
+        private void DeleteOrMoveTheFiles(SyncPostProcContent content)
         {
             foreach (var file in content.DeletedFiles)
             {
-                var fileInfo = new FileInfo(file.Path) { Attributes = FileAttributes.Normal };
-                try
+                if (addedFiles.Contains(file.Path,StringComparer.InvariantCultureIgnoreCase))
                 {
-                    fileInfo.Delete();
-                    SyncResult.DeletedFiles.Add(file.Path);
-                    SyncResult.Log.Add("Deleted: " + file.Path);
+                    MoveFile(file);
                 }
-                catch (Exception e)
+                else
                 {
-                    var msg = string.Format("Error: Could not delete the file '{0}'. Error: {1}", file.Path, e.Message);
-                    SyncResult.Errors.Add(msg);
+                    DeleteFile(file);
                 }
+
+            }
+        }
+
+        private void MoveFile(SyncPath file)
+        {
+            var fileInfo = new FileInfo(file.Path) { Attributes = FileAttributes.Normal };
+            var moveTo = addedFiles.First(path => path.Equals(file.Path, StringComparison.InvariantCultureIgnoreCase));
+            try
+            {
+                fileInfo.MoveTo(moveTo);
+                SyncResult.DeletedFiles.Add(file.Path);
+                SyncResult.Log.Add("Moved: " + file.Path);
+            }
+            catch (Exception e)
+            {
+                var msg = string.Format("Error: Could not move the file '{0}'. Error: {1}", file.Path, e.Message);
+                SyncResult.Errors.Add(msg);
+            }
+        }
+        private void DeleteFile(SyncPath file)
+        {
+            var fileInfo = new FileInfo(file.Path) {Attributes = FileAttributes.Normal};
+            try
+            {
+                fileInfo.Delete();
+                SyncResult.DeletedFiles.Add(file.Path);
+                SyncResult.Log.Add("Deleted: " + file.Path);
+            }
+            catch (Exception e)
+            {
+                var msg = string.Format("Error: Could not delete the file '{0}'. Error: {1}", file.Path, e.Message);
+                SyncResult.Errors.Add(msg);
             }
         }
 
